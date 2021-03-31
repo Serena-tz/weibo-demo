@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+		}
+
+		/*清除浮动公共样式*/
+		.clearfix:after {
+			content: "\20";
+			display: block;
+			height: 0;
+			clear: both;
+			visibility: hidden
+		}
+
+		.clearfix {
+			*zoom: 1
+		}
+
+		li {
+			list-style: none;
+		}
+
+		body {
+			background: url(img/bg.jpg) no-repeat;
+			background-size: cover;
+		}
+
+		.logo {
+			margin: 0 auto;
+			width: 500px;
+		}
+
+		.weibo {
+			position: relative;
+			margin: 0 auto;
+			padding: 20px;
+			width: 500px;
+			background-color: #fff;
+			text-align: center;
+		}
+
+		.content {
+			width: 480px;
+			height: 100px;
+			resize: none;
+			overflow: hidden;
+			font-size: 16px;
+			font-family: Tahoma, Arial;
+			border: 1px solid;
+		}
+
+		.choose {
+			text-align: left;
+		}
+
+		.choose a {
+			margin: 0 10px;
+			text-decoration: none;
+			color: #333;
+			font-size: 14px;
+		}
+
+		.footer {
+			width: 100%;
+			padding: 10px 0;
+			overflow: hidden;
+			text-align: center;
+			color: #999;
+			font-size: 20px;
+		}
+
+		.footer .counttxt {
+			float: right;
+			margin-right: 15px;
+			font-size: 20px;
+		}
+
+		.footer .counttxt em {
+			margin-right: 10px;
+		}
+
+		.footer button {
+			float: right;
+			width: 100px;
+			height: 30px;
+			line-height: 30px;
+			background-color: #8cc718;
+			color: #fff;
+			font-size: 20px;
+			border: 0;
+			border-radius: 5px;
+		}
+
+		.box {
+			position: absolute;
+			top: 155px;
+			left: 80px;
+			width: 480px;
+			height: 180px;
+			border: 1px solid;
+			background-color: #fff;
+			text-align: left;
+			display: none;
+		}
+
+		.box img {
+			cursor: pointer;
+		}
+
+		.allweibo {
+			text-align: left;
+			margin-left: 10px;
+		}
+
+		.allweibo h2 {
+			font-size: 16px;
+			line-height: 26px;
+			width: 80px;
+			text-align: center;
+			border-bottom: 3px solid skyblue;
+		}
+
+		.allul .touxiang {
+			border-radius: 5px;
+			margin-right: 20px;
+		}
+
+		.allul li {
+			margin-top: 20px;
+			clear: left;
+		}
+
+		.fl {
+			float: left;
+		}
+
+		.allul div p {
+			width: 400px;
+		}
+
+		.name {
+			font-weight: bold;
+			text-decoration: none;
+			color: #666;
+			display: inline-block;
+			padding-bottom: 8px;
+		}
+
+		.text {
+			display: inline-block;
+			font-size: 14px;
+			padding-left: 15px;
+			width: 415px;
+			overflow: hidden;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="logo"><img src="img/logo.png"></div>
+	<div class="weibo">
+		<!-- 多行文本域 -->
+		<textarea class="content"></textarea>
+		<div class="choose"><a href="javascript:void(0);">话题</a><a href="javascript:void(0);">表情</a><a
+				href="javascript:void(0);">图片</a><a href="javascript:void(0);">视频</a></div>
+		<div class="footer"><button type="button">广播</button><span class="counttxt">您还能输入<em
+					id="count">140</em>个字</span></div>
+		<!-- 表情包盒子 -->
+		<div class="box"></div>
+		<!-- 广播标题 -->
+		<div class="allweibo">
+			<h2>全部广播</h2>
+			<ul class="allul" id="allul">
+				<li class="clearfix">
+					<a class="fl" href="javascript:;">
+						<img class="touxiang" src="img/50.jpg" alt="">
+					</a>
+					<div class="fl">
+						<p>
+							<a class="name" href="">
+								韩梅梅
+							</a>
+						</p>
+						<p class="text">
+							不要太依赖一个人，因为依赖，所以期望，因为期望，所以失望，切记。
+						</p>
+					</div>
+				</li>
+				<li class="clearfix">
+					<a class="fl" href="javascript:;">
+						<img class="touxiang" src="img/51.jpg" alt="">
+					</a>
+					<div class="fl">
+						<p>
+							<a class="name" href="">
+								李雷
+							</a>
+						</p>
+						<p class="text">
+							别动不动就说把一切交给时间，时间才懒得收拾你的烂摊子。
+						</p>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<script src="../jquery-3.3.1.min.js"></script>
+	<script>
+		$(function () {
+			//表情包，通过JS将图片输出到页面中
+			var userFaces = { '0.gif': '微笑', '1.gif': '撇嘴', '2.gif': '色', '3.gif': '发呆', '4.gif': '得意', '5.gif': '流泪', '6.gif': '害羞', '7.gif': '闭嘴', '8.gif': '睡', '9.gif': '大哭', '10.gif': '尴尬', '11.gif': '发怒', '12.gif': '调皮', '13.gif': '呲牙', '14.gif': '惊讶', '15.gif': '难过', '16.gif': '酷', '17.gif': '冷汗', '18.gif': '抓狂', '19.gif': '吐', '20.gif': '偷笑', '21.gif': '可爱', '22.gif': '白眼', '23.gif': '傲慢', '24.gif': '饥饿', '25.gif': '困', '26.gif': '惊恐', '27.gif': '流汗', '28.gif': '憨笑', '29.gif': '大兵', '30.gif': '奋斗', '31.gif': '咒骂', '32.gif': '疑问', '33.gif': '嘘', '34.gif': '晕', '35.gif': '折磨', '36.gif': '衰', '37.gif': '骷髅', '38.gif': '敲打', '39.gif': '再见', '40.gif': '擦汗', '41.gif': '抠鼻', '42.gif': '鼓掌', '43.gif': '糗大了', '44.gif': '坏笑', '45.gif': '左哼哼', '46.gif': '右哼哼', '47.gif': '哈欠', '48.gif': '鄙视', '49.gif': '委屈', '50.gif': '快哭了', '51.gif': '阴险', '52.gif': '亲亲', '53.gif': '吓', '54.gif': '可怜', '55.gif': '菜刀', '56.gif': '西瓜', '57.gif': '啤酒', '58.gif': '篮球 ', '59.gif': '乒乓', '60.gif': '咖啡', '61.gif': '饭', '62.gif': '猪头', '63.gif': '玫瑰', '64.gif': '凋谢', '65.gif': '示爱', '66.gif': '爱心', '67.gif': '心碎', '68.gif': '蛋糕', '69.gif': '闪电', '70.gif': '炸弹', '71.gif': '刀', '72.gif': '足球', '73.gif': '瓢虫', '74.gif': '便便', '75.gif': '月亮', '76.gif': '太阳', '77.gif': '礼物', '78.gif': '拥抱', '79.gif': '强', '80.gif': '弱', '81.gif': '握手', '82.gif': '胜利', '83.gif': '抱拳', '84.gif': '勾引', '85.gif': '拳头', '86.gif': '差劲', '87.gif': '爱你', '88.gif': 'NO', '89.gif': 'OK', '90.gif': '爱情', '91.gif': '飞吻', '92.gif': '跳跳', '93.gif': '发抖', '94.gif': '怄火', '95.gif': '转圈', '96.gif': '磕头', '97.gif': '回头', '98.gif': '跳绳', '99.gif': '挥手', '100.gif': '激动', '101.gif': '街舞', '102.gif': '献吻', '103.gif': '左太极', '104.gif': '右太极', '105.gif': '淡定', '106.gif': '晕', '107.gif': '不满', '108.gif': '睡觉', '109.gif': '小调皮', '110.gif': '咒骂', '111.gif': '发怒', '112.gif': '偷笑', '113.gif': '微笑', '114.gif': '震惊', '115.gif': '囧' };
+			// 表情包盒子
+			var $box = $(".box");
+			//多行文本域对象
+			var $content = $(".content");
+			//遍历表情包对象，将每个表情添加进表情包盒子
+			for (var img in userFaces) {
+				$box.append($('<img src="faces/' + img + '" alt="[' + userFaces[img] + ']">'));
+			};
+			//点击表情按钮，出现表情包盒子
+			$(".choose a:eq(1)").click(function () {
+				$box.is(":hidden") ? $box.show() : $box.hide();
+			})
+			//给每个表情绑定单击事件，点击将文字塞进文本域
+			$(".box img").click(function () {
+				$box.hide();
+				var $val = $content.val();
+				$("#count").text(140 - ($val + $(this).attr("alt")).length);
+				$content.val($val + $(this).attr("alt"));
+				// 如果到了0，就不能继续输入内容了
+				no($content);
+			})
+			//点击话题按钮，将话题塞进文本域
+			$(".choose a:eq(0)").click(function () {
+				var $val = $content.val();
+				$("#count").text(140 - ($val + "#输入话题标题#").length);
+				$content.val($val + "#输入话题标题#");
+				// 如果到了0，就不能继续输入内容了
+				no($content);
+			})
+			//在文本域输入文字时，字数减少
+			$content.keyup(function () {
+				var len = $(this).val().length;
+				$("#count").text(140 - len);
+				no(this);
+			});
+			// 如果到了0，就不能继续输入内容了，no函数
+			function no(obj) {
+				if ($("#count").text() <= 0) {
+					//	截取字符串前140个字符
+					var short = $(obj).val().substring(0, 139);
+					// 替换文本域的内容
+					$(obj).val(short);
+					$("#count").text("0");
+				}
+			}
+			// 为广播按钮绑定点击事件
+			$('[type="button"]').click(function () {
+				var $val = $content.val();
+				// 如果输入为空，则不允许广播
+				if (!$val) {
+					alert("您的广播不能为空！");
+					return;
+				}
+				// 将文字替换为表情
+				for (var img in userFaces) {
+					var reg = new RegExp('\\[' + userFaces[img] + '\\]',"g");
+					$val=$val.replace(reg, '<img src="faces/' + img + '" alt="[' + userFaces[img] + ']">');
+				};
+				// 创建一个新的li
+				var $li = $('<li class="clearfix">\n<a class="fl" href="javascript:;">\n<img class="touxiang" src="img/53.jpg" alt="">\n</a>\n<div class="fl">\n<p>\n<a class="name" href="">\n马冬梅\n</a>\n</p>\n<p class="text">\n' + $val + '\n</p>\n</div>\n</li>');
+				// 全部广播插入一条新广播
+				$(".allul").prepend($li);
+				// 文本域内容清空
+				$content.val("");
+				// 可输入数字回归140
+				$("#count").text("140");
+			});
+		})
+	</script>
+</body>
+
+</html>
